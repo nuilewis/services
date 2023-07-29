@@ -36,7 +36,7 @@ jobs:
           avd-name: customavd
           no-window: true
           restore-gradle-cache-prefix: v1
-          # post-emulator-launch-assemble-command: ./gradlew assemble
+          post-emulator-launch-assemble-command: ./gradlew assemble
       - android/wait-for-emulator
       - run: 
           name: Grant external storage permissions
