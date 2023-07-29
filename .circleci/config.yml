@@ -31,7 +31,7 @@ jobs:
           avd-name: customavd
           install: true
           system-image: system-images;android-29;default;x86
-          additional-args: "--sdcard <2048>[M]"
+          additional-args: --sdcard 2048M
       - android/start-emulator:
           avd-name: customavd
           no-window: true
@@ -111,7 +111,7 @@ jobs:
 
 
 workflows:
-  build-test-deploy-trigger-workflow:
+  build-test-deploy-workflow:
     jobs:
       # - build
       - test
