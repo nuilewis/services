@@ -36,7 +36,14 @@ jobs:
           avd-name: customavd
           no-window: true
           restore-gradle-cache-prefix: v1
-          post-emulator-launch-assemble-command: ./gradlew assemble
+          # post-emulator-launch-assemble-command: ./gradlew assemble
+      - android/wait-for-emulator
+      - run: 
+          name: Grant external storage permissions
+          command: |
+              $ adb shell pm grant org.opendatakit.services.test android.permission.READ_EXTERNAL_STORAGE
+              $ adb shell pm grant org.opendatakit.services.test android.permission.WRITE_EXTERNAL_STORAGE
+
       - android/run-tests:
           test-command: ./gradlew test
       - android/run-tests:
