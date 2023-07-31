@@ -23,17 +23,19 @@ jobs:
       - run:
           name: Chmod Permissions
           command: sudo chmod +x gradlew
+
       - run:
           name: Update Package list
           command: sudo apt-get update
-
+      - run:
+          name: Install the latest Android SDK
+          command: |
+            sdkmanager --update
       - android/create-avd:
           avd-name: customavd
           install: true
           system-image: system-images;android-29;default;x86
           additional-args: --sdcard 2048M
-
-
 
       - android/start-emulator:
           avd-name: customavd
@@ -45,13 +47,13 @@ jobs:
           name: show package name
           command: adb shell pm list packages
       
-      # - android/run-tests:
-      #     test-command: ./gradlew test
+      - android/run-tests:
+          test-command: ./gradlew test
 
-      # - android/run-tests:
-      #     test-command: ./gradlew connectedAndroidTest --info
-      # - android/save-gradle-cache:
-      #     cache-prefix: v1
+      - android/run-tests:
+          test-command: ./gradlew connectedAndroidTest --info
+      - android/save-gradle-cache:
+          cache-prefix: v1
 
   build:
     docker:
