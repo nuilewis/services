@@ -82,7 +82,7 @@ jobs:
       - android/save-gradle-cache:
           cache-prefix: v1
       - run:
-          name: Build Library
+          name: Build Services
           command: ./gradlew assemble
 
   deploy:
