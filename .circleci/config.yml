@@ -31,10 +31,11 @@ jobs:
           name: Install the latest Android SDK
           command: |
             sdkmanager --update
+            sdkmanager --list
       - android/create-avd:
           avd-name: customavd
           install: true
-          system-image: system-images;android-latest;default;x86
+          system-image: system-images;android-29;default;x86
           additional-args: --sdcard 2048M
 
       - android/start-emulator:
