@@ -33,15 +33,17 @@ jobs:
           system-image: system-images;android-29;default;x86
           additional-args: --sdcard 2048M
 
+
+
+      - android/start-emulator:
+          avd-name: customavd
+          no-window: true
+          restore-gradle-cache-prefix: v1
+          post-emulator-launch-assemble-command: ./gradlew assemble
+
       - run:
           name: show package name
           command: adb shell pm list packages
-
-      # - android/start-emulator:
-      #     avd-name: customavd
-      #     no-window: true
-      #     restore-gradle-cache-prefix: v1
-      #     post-emulator-launch-assemble-command: ./gradlew assemble
       
       # - android/run-tests:
       #     test-command: ./gradlew test
