@@ -38,14 +38,14 @@ jobs:
           restore-gradle-cache-prefix: v1
           post-emulator-launch-assemble-command: ./gradlew assemble
       
+      - android/run-tests:
+          test-command: ./gradlew test
       - run: 
           name: Grant external storage permissions
           command: |
               adb shell pm grant org.opendatakit.services android.permission.READ_EXTERNAL_STORAGE
               adb shell pm grant org.opendatakit.services android.permission.WRITE_EXTERNAL_STORAGE
 
-      - android/run-tests:
-          test-command: ./gradlew test
       - android/run-tests:
           test-command: ./gradlew connectedAndroidTest
       - android/save-gradle-cache:
