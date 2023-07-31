@@ -40,11 +40,6 @@ jobs:
       
       - android/run-tests:
           test-command: ./gradlew test
-      - run: 
-          name: Grant external storage permissions
-          command: |
-              adb shell pm grant org.opendatakit.services android.permission.READ_EXTERNAL_STORAGE
-              adb shell pm grant org.opendatakit.services android.permission.WRITE_EXTERNAL_STORAGE
 
       - android/run-tests:
           test-command: ./gradlew connectedAndroidTest
