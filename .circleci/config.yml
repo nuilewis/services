@@ -52,7 +52,7 @@ jobs:
       #     test-command: ./gradlew test
 
       - android/run-tests:
-          test-command: ./gradlew connectedAndroidTest
+          test-command: ./gradlew grantPermissionForODkApp connectedAndroidTest
       - android/save-gradle-cache:
           cache-prefix: v1
 
