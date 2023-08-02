@@ -35,7 +35,7 @@ jobs:
       - android/create-avd:
           avd-name: customavd
           install: true
-          system-image: system-images;android-30;default;x86_64
+          system-image: system-images;android-28;default;x86_64
           additional-args: --sdcard 2048M
 
       - android/start-emulator:
@@ -43,11 +43,7 @@ jobs:
           no-window: true
           restore-gradle-cache-prefix: v1
           post-emulator-launch-assemble-command: ./gradlew assemble
-
-      - run:
-          name: show package name
-          command: adb shell pm list packages
-      
+     
       # - android/run-tests:
       #     test-command: ./gradlew test
 
