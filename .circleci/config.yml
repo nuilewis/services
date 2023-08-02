@@ -42,7 +42,7 @@ jobs:
           avd-name: customavd
           no-window: true
           restore-gradle-cache-prefix: v1
-          post-emulator-launch-assemble-command: ./gradlew assemble
+          post-emulator-launch-assemble-command: ./gradlew installDebug
      
       # - android/run-tests:
       #     test-command: ./gradlew test
@@ -85,38 +85,6 @@ jobs:
       - run:
           name: Build Services
           command: ./gradlew assemble
-
-  deploy:
-    executor:
-      name: android/android-docker
-      tag: 2023.06.1
-    steps:
-      - checkout
-      - run:
-          name: Install OpenJDK 8
-          command: |
-            sudo apt-get update && sudo apt-get install -y openjdk-8-jdk
-            sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
-            sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
-            echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"' >> $BASH_ENV
-            java -version
-      - run:
-          name: Chmod Permissions
-          command: sudo chmod +x gradlew
-      - android/restore-gradle-cache:
-          cache-prefix: v1
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - android/save-gradle-cache:
-          cache-prefix: v1
-      #      - run:
-      #          name: Publish library
-      #          command: ./gradlew publish
-      - run:
-          name: Publish Services Build
-          command: echo "Todo, figure out how we would go about publishing the build artifacts"
-
 
 workflows:
   build-test-deploy-workflow:
