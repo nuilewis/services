@@ -56,7 +56,8 @@ jobs:
           command: adb shell pm list packages
       - run:
           name: install the services app on the emulator
-          command: adb install ${CIRCLE_WORKING_DIRECTORY}/services_app/build/outputs/apk/debug/app-debug.apk
+         # command: adb install ${CIRCLE_WORKING_DIRECTORY}/services_app/build/outputs/apk/debug/app-debug.apk
+          command: adb install ${CIRCLE_WORKING_DIRECTORY}/services_app/build/outputs/apk/demoBasic/debug/services_app-demo-basic-debug.apk
       - run:
           name: show installed packages
           command: adb shell pm list packages
