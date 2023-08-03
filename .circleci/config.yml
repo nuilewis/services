@@ -41,7 +41,7 @@ jobs:
           avd-name: customavd
           no-window: true
           restore-gradle-cache-prefix: v1
-         
+          post-emulator-launch-assemble-command: ./gradlew assemble install
       - run:
           name: show installed packages
           command: sdkmanager --list
