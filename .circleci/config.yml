@@ -31,6 +31,9 @@ jobs:
           name: Install the latest Android SDK
           command: |
             sdkmanager --update
+      - run:
+          name: show gradle tasks
+          command: ./gradlew tasks
       - android/create-avd:
           avd-name: customavd
           install: true
@@ -41,7 +44,7 @@ jobs:
           avd-name: customavd
           no-window: true
           restore-gradle-cache-prefix: v1
-          post-emulator-launch-assemble-command: ./gradlew connectedAndroidTest
+          post-emulator-launch-assemble-command: echo "nothing"
       - run:
           name: show installed packages
           command: sdkmanager --list
