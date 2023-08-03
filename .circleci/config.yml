@@ -31,7 +31,6 @@ jobs:
           name: Install the latest Android SDK
           command: |
             sdkmanager --update
-            sdkmanager --list
       - android/create-avd:
           avd-name: customavd
           install: true
@@ -42,7 +41,11 @@ jobs:
           avd-name: customavd
           no-window: true
           restore-gradle-cache-prefix: v1
-          post-emulator-launch-assemble-command: ./gradlew installDebug
+         
+      - run:
+          name: show installed packages
+          command: sdkmanager --list
+
      
       # - android/run-tests:
       #     test-command: ./gradlew test
