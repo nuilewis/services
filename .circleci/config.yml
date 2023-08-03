@@ -44,7 +44,7 @@ jobs:
           avd-name: customavd
           no-window: true
           restore-gradle-cache-prefix: v1
-          post-emulator-launch-assemble-command: echo "nothing"
+          post-emulator-launch-assemble-command: ./gradlew installDebug
       - run:
           name: Check emulator status
           command: |
