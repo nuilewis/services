@@ -46,14 +46,20 @@ jobs:
           restore-gradle-cache-prefix: v1
           post-emulator-launch-assemble-command: echo "nothing"
       - run:
+          name: Check emulator status
+          command: |
+            adb devices
+            adb shell getprop sys.boot_completed
+            echo "if sys.boot_completed = 1 means emualtor has finished booting"
+      - run:
           name: show installed packages
-          command: adb shell pm list
+          command: adb shell pm list packages
       - run:
           name: install the services app on the emulator
           command: adb install ${CIRCLE_WORKING_DIRECTORY}/build/outputs/apk/debug/app-debug.apk
       - run:
           name: show installed packages
-          command: adb shell pm list
+          command: adb shell pm list packages
 
      
       # - android/run-tests:
