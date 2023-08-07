@@ -61,7 +61,7 @@ android {
             dimension 'testing'
         }
     }
-
+2
     signingConfigs {
         release {
             if (shouldSign) {
@@ -138,12 +138,12 @@ dependencies {
 
     implementation group: 'com.google.zxing', name: 'core', version: '3.3.0'
     implementation group: 'com.journeyapps', name: 'zxing-android-embedded', version: '3.5.0'
-    
     if (libraryProjectPath.exists() && gradle.useLocal) { // Local project is favoured
         implementation project(libraryProjectName)
     } else {
         ///Todo: properly specify all flavour implementations of the androidLibrary
-        implementation 'org.opendatakit:androidlibrary_lib:1.0.1:snapshotBasicRelease@aar'
+        implementation(group:'org.opendatakit', name: 'androidlibrary_lib', classifier: 'snapshotBasicRelease', version: '+', ext: 'aar')
+
 
 //        demoImplementation(group: groupId, name: libraryDemoArtifactName, classifier: demoRelease,
 //                version: latestVersion, ext: 'aar')
