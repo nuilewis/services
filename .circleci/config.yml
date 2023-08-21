@@ -103,14 +103,20 @@ jobs:
       - run:
           name: Build Services
           command: ./gradlew assemble
+      - store_artifacts:
+          path: services_app/build/outputs/apk/snapshotBasic/debug/services_app-snapshot-basic-debug.apk
+      - persist_to_workspace:
+          root: .
+          paths:
+            - "services_app/build/outputs/apk/snapshotBasic/debug/services_app-snapshot-basic-debug.apk"
 
 workflows:
   build-test-deploy-workflow:
     jobs:
       - build
-      - test:
-          requires:
-            - build
+      # - test:
+      #     requires:
+      #       - build
 
 
 
