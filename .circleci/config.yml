@@ -109,13 +109,7 @@ jobs:
       - store_artifacts:
           name: Store Build Artifacts
           path: services_app/build/outputs/apk
-            
-      - persist_to_workspace:
-          root: .
-          paths:
-            - "services_app/build/outputs/apk/snapshotBasic/debug/services_app-snapshot-basic-debug.apk"
-            - "services_app/build/outputs/apk"
-            - "tables_app/build/outputs/androidTest-results"
+
 
 workflows:
   build-test-deploy-workflow:
