@@ -60,8 +60,7 @@ jobs:
       - run:
           name: show installed packages
           command: adb shell pm list packages
-
-     
+ 
       - android/run-tests:
           test-command: ./gradlew test
 
