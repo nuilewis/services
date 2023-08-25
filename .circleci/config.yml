@@ -71,6 +71,9 @@ jobs:
       - store_artifacts:
           name: Store Test Results
           path: services_app/build/outputs/androidTest-results
+      - store_artifacts:
+          name: Store Test Reports
+          path: tables_app/build/reports
 
   build:
     docker:
