@@ -121,8 +121,7 @@ jobs:
             ls ~/project
             go install github.com/tcnksm/ghr@latest
             VERSION=v1
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .~/project/services_app/build/outputs/apk
-
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .~/project/services_app/build/outputs/apk/snapshotBasic/release/services_app-snapshot-basic-release-unsigned.apk
 
 
 
