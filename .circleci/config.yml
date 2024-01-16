@@ -96,13 +96,10 @@ jobs:
       - android/save-gradle-cache:
           cache-prefix: v1
       - run:
-          name: ls root directory
-          command: ls ~/
-      - run:
           name: Build Services
           command: ./gradlew assemble
       - persist_to_workspace:
-          root: ~/tmp/workspace
+          root: ~/project
           paths:
             - "services_app/build/outputs/apk"
       - store_artifacts:
@@ -116,13 +113,12 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/tmp/workspace
+          at: ~/project
       - run:
           name: Deploy Build to Github
           command: |
             ls ~/
             ls ~/project
-            ls ~/tmp/workspace
             go get github.com/tcnksm/ghr
             VERSION=$(my-binary --version)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .~/project/services_app/build/outputs/apk
