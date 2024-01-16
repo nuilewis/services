@@ -99,7 +99,7 @@ jobs:
           name: Build Services
           command: ./gradlew assemble
       - persist_to_workspace:
-          root: ~/project
+          root: ~/tmp/workspace
           paths:
             - "services_app/build/outputs/apk"
       - store_artifacts:
@@ -109,15 +109,17 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/base:2024.01
+      - image: cimg/go:1.21.6
     steps:
       - checkout
       - attach_workspace:
-          at: ~/project
+          at: ~/tmp/workspace
       - run:
           name: Deploy Build to Github
           command: |
+            ls ~/
             ls ~/project
+            ls ~/tmp/workspace
             go get github.com/tcnksm/ghr
             VERSION=$(my-binary --version)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .~/project/services_app/build/outputs/apk
