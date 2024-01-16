@@ -115,16 +115,12 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-          name: List artificats in workspace
-          command: |
-                  cd tmp/workspace
-                  ls
-      - run:
           name: Deploy Build to Github
           command: |
+            ls ~/project
             go get github.com/tcnksm/ghr
             VERSION=$(my-binary --version)
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./tmp/workspace/services_app/build/outputs/apk
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .~/project/services_app/build/outputs/apk
 
 
 
