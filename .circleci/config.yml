@@ -99,7 +99,7 @@ jobs:
           name: Build Services
           command: ./gradlew assemble
       - persist_to_workspace:
-          root: workspace
+          root: ~/project
           paths:
             - "services_app/build/outputs/apk"
       - store_artifacts:
@@ -113,7 +113,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: tmp/workspace
+          at: ~/project
       - run:
           name: List artificats in workspace
           command: |
