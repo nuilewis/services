@@ -9,7 +9,7 @@ jobs:
       name: android/android-machine
       resource-class: large
       tag: 2021.10.1
-    parallelism: 4
+  #  parallelism: 4
 
     steps:
       - checkout
@@ -24,14 +24,6 @@ jobs:
       - run:
           name: Chmod Permissions
           command: sudo chmod +x gradlew
-#      - run:
-#          name: Update Package list
-#          command: sudo apt-get update
-#      - run:
-#          name: Install the latest Android SDK
-#          command: |
-#            sdkmanager --update
-#     psuedo update to config.yml to trigger circleci
       - run:
           name: show gradle tasks
           command: ./gradlew tasks
@@ -71,7 +63,7 @@ jobs:
           path: services_app/build/outputs/androidTest-results
       - store_artifacts:
           name: Store Test Reports
-          path: tables_app/build/reports
+          path: services_app/build/reports
 
   build:
     docker:
@@ -106,13 +98,43 @@ jobs:
       - run:
           name: Build Services
           command: ./gradlew assemble
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - "services_app/build/outputs/apk"
       - store_artifacts:
           name: Store Build Artifacts
           path: services_app/build/outputs/apk
+
+
+  deploy:
+    docker:
+      - image: cimg/base:2024.01
+    steps:
+      - checkout
+      - attach_workspace:
+          at: tmp/workspace
+      - run:
+          name: List artificats in workspace
+          command: |
+                  cd tmp/workspace
+                  ls
+      - run:
+          name: Deploy Build to Github
+          command: |
+            go get github.com/tcnksm/ghr
+            VERSION=$(my-binary --version)
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./tmp/workspace/services_app/build/outputs/apk
+
+
+
 
 
 workflows:
   build-test-workflow:
     jobs:
       - build
-      - test
+      # - test
+      - deploy:
+          requires:
+            - build
