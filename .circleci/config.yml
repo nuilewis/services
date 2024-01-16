@@ -119,7 +119,7 @@ jobs:
           command: |
             ls ~/
             ls ~/project
-            go get github.com/tcnksm/ghr
+            go install github.com/tcnksm/ghr
             VERSION=$(my-binary --version)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .~/project/services_app/build/outputs/apk
 
