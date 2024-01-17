@@ -101,7 +101,7 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths:
-            - "services_app/build/outputs/apk"
+            - "services_app/build"
       - store_artifacts:
           name: Store Build Artifacts
           path: services_app/build/outputs/apk
