@@ -117,8 +117,13 @@ jobs:
       - run:
           name: Deploy Build to Github
           command: |
+            echo 'root' directory
             ls ~/
+            echo 'project' directory
             ls ~/project
+            echo 'services_app/build/output/apk' directooy
+            ls ~/project/services_app/build/output/apk
+            
             go install github.com/tcnksm/ghr@latest
             VERSION=v1
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .~/project/services_app/build/outputs/apk/snapshotBasic/release/services_app-snapshot-basic-release-unsigned.apk
