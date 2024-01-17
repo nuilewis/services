@@ -117,13 +117,13 @@ jobs:
       - run:
           name: Deploy Build to Github
           command: |
-            echo 'root' directory
+            echo print 'root' directory
             ls ~/
-            echo 'project' directory
+            echo print 'project' directory
             ls ~/project
-            echo 'services_app/build/output/apk' directooy
+            echo print 'services_app/build/output/apk' directooy
             ls ~/project/services_app
-            ls ~/project/services_app/build/output/apk
+           # ls ~/project/services_app/build/output/apk
             
             go install github.com/tcnksm/ghr@latest
             VERSION=v1
