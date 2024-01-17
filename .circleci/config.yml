@@ -116,12 +116,11 @@ jobs:
       - run:
           name: Deploy Build to Github
           command: |
-            echo print 'root' directory
-            ls ~/
-            echo print 'project' directory
-            ls ~/project
+       
             echo print all direcroties within 'services_app' directory directooy
-            ls -d ~/project/services_app/*/
+            ls -d ~/project/services_app/build/
+
+            ls workspaces/
             
             go install github.com/tcnksm/ghr@latest
             VERSION=v1
