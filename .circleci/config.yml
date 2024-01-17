@@ -111,7 +111,6 @@ jobs:
     docker:
       - image: cimg/go:1.21.6
     steps:
-      # - checkout
       - attach_workspace:
           at: ~/project
       - run:
@@ -121,8 +120,8 @@ jobs:
             ls ~/
             echo print 'project' directory
             ls ~/project
-            echo print 'services_app/build/output/apk' directooy
-            ls ~/project/services_app
+            echo print all direcroties within 'services_app' directory directooy
+            ls -d ~/project/services_app/*/
             
             go install github.com/tcnksm/ghr@latest
             VERSION=v1
