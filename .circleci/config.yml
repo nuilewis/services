@@ -122,6 +122,7 @@ jobs:
             echo 'project' directory
             ls ~/project
             echo 'services_app/build/output/apk' directooy
+            ls ~/project/services_app
             ls ~/project/services_app/build/output/apk
             
             go install github.com/tcnksm/ghr@latest
@@ -134,7 +135,7 @@ jobs:
 workflows:
   build-test-workflow:
     jobs:
-      - build
+     # - build
       # - test
       - deploy:
           requires:
