@@ -116,13 +116,10 @@ jobs:
       - run:
           name: Deploy Build to Github
           command: |
-            ls -d .
-            echo print all direcroties within 'services_app' directory directooy
-            ls -d ~/project/services_app/build/
-            
+            ls -d .            
             go install github.com/tcnksm/ghr@latest
             echo "export SHORT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)" >> $BASH_ENV
-            VERSION=SHORT_HASH
+            VERSION=$SHORT_HASH
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./services_app/build/outputs/apk/snapshotBasic/release/services_app-snapshot-basic-release-unsigned.apk
 
 
