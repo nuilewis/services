@@ -118,7 +118,7 @@ jobs:
           command: |            
             go install github.com/tcnksm/ghr@latest
             echo "export SHORT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)" >> $BASH_ENV
-            VERSION=services-snapshot-${SHORT_HASH}
+            VERSION="services-snapshot-${SHORT_HASH}""
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./services_app/build/outputs/apk/snapshotBasic/release/services_app-snapshot-basic-release-unsigned.apk
 
 
