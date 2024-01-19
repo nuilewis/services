@@ -99,9 +99,9 @@ jobs:
           name: Build Services
           command: ./gradlew assemble
       - persist_to_workspace:
-          root: ~/project
+          root: .
           paths:
-            - "services_app/build"
+            - "services_app/build/outputs"
       - store_artifacts:
           name: Store Build Artifacts
           path: services_app/build/outputs/apk
@@ -112,17 +112,17 @@ jobs:
       - image: cimg/go:1.21.6
     steps:
       - attach_workspace:
-          at: ~/project
+          at: .
       - run:
           name: Deploy Build to Github
           command: |
-       
+            ls -d .
             echo print all direcroties within 'services_app' directory directooy
             ls -d ~/project/services_app/build/
             
             go install github.com/tcnksm/ghr@latest
             VERSION=v1
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .~/project/services_app/build/outputs/apk/snapshotBasic/release/services_app-snapshot-basic-release-unsigned.apk
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./services_app/build/outputs/apk/snapshotBasic/release/services_app-snapshot-basic-release-unsigned.apk
 
 
 
